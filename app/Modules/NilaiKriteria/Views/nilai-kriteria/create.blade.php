@@ -14,13 +14,13 @@
           <!-- ============================================================== -->
           <div class="row page-titles">
               <div class="col-md-5 align-self-center">
-                  <h4 class="text-themecolor">Create New Nilaikriteria </h4>
+                  <h4 class="text-themecolor">Create New Nilai Kriteria </h4>
               </div>
               <div class="col-md-7 align-self-center text-right">
                   <div class="d-flex justify-content-end align-items-center" style="display:inline-flex!important">
                       <ol class="breadcrumb">
                           <li class="breadcrumb-item"><a href="{{ route('home.index') }}">Home</a></li>
-                          <li class="breadcrumb-item active">Create Nilaikriteria</li>
+                          <li class="breadcrumb-item active">Create Nilai Kriteria</li>
                       </ol>
                       <a href="{{ url('/nilai-kriteria') }}" class="btn btn-info m-l-15"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
                   </div>
@@ -35,7 +35,7 @@
           <div class="row justify-content-md-center">
               <div class="col-12">
                   <div class="card">
-                    <div class="card-header bg-info"><h4 class="m-b-0 text-white">New NilaiKriteria</h4>
+                    <div class="card-header bg-info"><h4 class="m-b-0 text-white">Nilai Kriteria: {{ $kriteria->kriteria }}</h4>
                     </div>
                       <div class="card-body">
                         @if ($errors->any())

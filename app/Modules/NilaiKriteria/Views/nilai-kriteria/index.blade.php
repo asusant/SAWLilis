@@ -16,15 +16,15 @@
           <!-- ============================================================== -->
           <div class="row page-titles">
               <div class="col-md-5 align-self-center">
-                  <h4 class="text-themecolor">Nilaikriteria </h4>
+                  <h4 class="text-themecolor">Nilai Kriteria </h4>
               </div>
               <div class="col-md-7 align-self-center text-right">
                   <div class="justify-content-end align-items-center" style="display:inline-flex!important">
                       <ol class="breadcrumb">
                           <li class="breadcrumb-item"><a href="{{ route('home.index') }}">Home</a></li>
-                          <li class="breadcrumb-item active">Nilaikriteria</li>
+                          <li class="breadcrumb-item active">Nilai Kriteria</li>
                       </ol>
-                      <a href="{{ url('/nilai-kriteria/create') }}" class="btn btn-info {{--d-none d-lg-block--}} m-l-15"><i class="fa fa-plus-circle"></i> Create New Nilaikriteria</a>
+                      <a href="{{ url('/nilai-kriteria/create?kriteria='.$kriteria) }}" class="btn btn-info {{--d-none d-lg-block--}} m-l-15"><i class="fa fa-plus-circle"></i> Create New Nilaikriteria</a>
                   </div>
               </div>
           </div>
@@ -46,7 +46,9 @@
                                   <thead>
                                       <tr>
                                           <th style="width:100px; max-width:100px">#</th>
-                                          <th>Kriteria Id</th><th>Deskripsi</th><th>Nilai</th>
+                                          <th>Kriteria</th>
+                                          <th>Deskripsi</th>
+                                          <th>Nilai</th>
                                           <th style="width:150px; max-width:150px">Actions</th>
                                       </tr>
                                   </thead>
@@ -106,12 +108,12 @@
           serverSide: true,
           deferRender: true,
           ajax: {
-              url: "{{ url('/details/nilai-kriteria?kriteria='.$kriteria) }}",
+              url: "{{ url('/details/nilai-kriteria/'.$kriteria) }}",
               method: 'GET',
           },
           columns: [
           { data: 'no', 'searchable': false },
-          { data: 'kriteria_id' , name: 'kriteria_id' },
+          { data: 'kriteria.kriteria' , name: 'kriteria.kriteria' },
 { data: 'deskripsi' , name: 'deskripsi' },
 { data: 'nilai' , name: 'nilai' },
 

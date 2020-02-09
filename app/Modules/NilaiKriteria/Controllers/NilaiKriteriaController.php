@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Modules\NilaiKriteria\Models\NilaiKriteria;
+use App\Modules\Kriteria\Models\Kriteria;
 use App\Modules\Log\Models\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -23,7 +24,7 @@ class NilaiKriteriaController extends Controller
     {
         if(!$request->get('kriteria'))
         {
-            return redirect()->back()->with('message_danger', 'Parameter Kriteria harus didefinisikan!');
+            return redirect()->back()->with('message_error', 'Parameter Kriteria harus didefinisikan!');
         }
         $kriteria = $request->get('kriteria');
         return view('NilaiKriteria::nilai-kriteria.index', compact('kriteria'));
@@ -38,18 +39,19 @@ class NilaiKriteriaController extends Controller
     public function details($kriteria)
     {
         DB::statement(DB::raw('set @no=0'));
-        $model = NilaiKriteria::where('kriteria_id', $kriteria)
-            ->select([DB::raw('@no  := @no  + 1 AS no'), 'nilaikriterias.*']);
+        $model = NilaiKriteria::with('kriteria')
+            ->where('kriteria_id', $kriteria)
+            ->select([DB::raw('@no  := @no  + 1 AS no'), 'nilai_kriterias.*']);
         $data = new Datatables;
         return $data->eloquent($model)
                 ->addColumn('action', function($data){
                   return '<td>
-                      <a href="'. route('kriteria.nilai-kriteria.show', $data->id) .'" title="View NilaiKriteria"><button class="btn btn-outline-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                      <a href="'. route('kriteria.nilai-kriteria.edit', $data->id) .'" title="Edit NilaiKriteria"><button class="btn btn-outline-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                      <a href="'. route('kriteria.nilai-kriteria.show', $data->id) .'" title="View Nilai Kriteria"><button class="btn btn-outline-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
+                      <a href="'. route('kriteria.nilai-kriteria.edit', $data->id) .'" title="Edit Nilai Kriteria"><button class="btn btn-outline-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                       <form method="POST" action="'. route('kriteria.nilai-kriteria.destroy', $data->id) .'" accept-charset="UTF-8" style="display:inline">
                           '.method_field("DELETE").'
                           '.csrf_field().'
-                          <a href="javascript:void(0)" onclick="delete_item(this);return false;" id="delete-item" class="btn btn-outline-danger btn-sm" title="Delete NilaiKriteria" ><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
+                          <a href="javascript:void(0)" onclick="delete_item(this);return false;" id="delete-item" class="btn btn-outline-danger btn-sm" title="Delete Nilai Kriteria" ><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
                       </form>
                   </td>';
                 })
@@ -62,9 +64,15 @@ class NilaiKriteriaController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('NilaiKriteria::nilai-kriteria.create');
+        if(!$request->get('kriteria'))
+        {
+            return redirect()->back()->with('message_error', 'Parameter Kriteria harus didefinisikan!');
+        }
+        $id_kriteria = $request->get('kriteria');
+        $kriteria = Kriteria::find($id_kriteria);
+        return view('NilaiKriteria::nilai-kriteria.create', compact('kriteria'));
     }
 
     /**
@@ -88,7 +96,7 @@ class NilaiKriteriaController extends Controller
 
         Log::captureLog(Auth::user()->id, 'nilaikriterias', $data->id, 'store', 'User dengan ID = '.Auth::user()->id.' menambah data NilaiKriteria dengan ID = '.$data->id.' via Web');
 
-        return redirect('nilai-kriteria')->with('message_success', 'NilaiKriteria added!');
+        return redirect('nilai-kriteria?kriteria='.$requestData['kriteria_id'])->with('message_success', 'NilaiKriteria added!');
     }
 
     /**
@@ -116,7 +124,9 @@ class NilaiKriteriaController extends Controller
     {
         $nilaikriterium = NilaiKriteria::findOrFail($id);
 
-        return view('NilaiKriteria::nilai-kriteria.edit', compact('nilaikriterium'));
+        $kriteria = Kriteria::find($nilaikriterium->kriteria_id);
+
+        return view('NilaiKriteria::nilai-kriteria.edit', compact('nilaikriterium','kriteria'));
     }
 
     /**
@@ -142,7 +152,7 @@ class NilaiKriteriaController extends Controller
 
         Log::captureLog(Auth::user()->id, 'nilaikriterias', $data->id, 'update', 'User dengan ID = '.Auth::user()->id.' mengubah data NilaiKriteria dengan ID = '.$data->id.' via Web');
 
-        return redirect('nilai-kriteria')->with('message_success', 'NilaiKriteria updated!');
+        return redirect('nilai-kriteria?kriteria='.$data->kriteria_id)->with('message_success', 'NilaiKriteria updated!');
     }
 
     /**
@@ -162,6 +172,6 @@ class NilaiKriteriaController extends Controller
 
         Log::captureLog(Auth::user()->id, 'nilaikriterias', $id, 'store', 'User dengan ID = '.Auth::user()->id.' menghapus data NilaiKriteria dengan ID = '.$id.' via Web');
 
-        return redirect('nilai-kriteria')->with('message_success', 'NilaiKriteria deleted!');
+        return redirect('nilai-kriteria?kriteria='.$nilaikriterium->kriteria_id)->with('message_success', 'NilaiKriteria deleted!');
     }
 }

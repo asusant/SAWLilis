@@ -39,9 +39,9 @@ class KriteriaController extends Controller
         return $data->eloquent($model)
                 ->addColumn('action', function($data){
                   return '<td>
-                      <a href="'. route('kriteria.nilai-kriteria.index', $data->id) .'" title="Nilai Kriteria"><button class="btn btn-outline-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Nilai Kriteria</button></a>
-                      <a href="'. route('kriteria.show', $data->id) .'" title="View Kriteria"><button class="btn btn-outline-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
+                      <a href="'. route('kriteria.nilai-kriteria.index', ['kriteria' => $data->id]) .'" title="Nilai Kriteria"><button class="btn btn-outline-warning btn-sm"><i class="fa fa-check-square" aria-hidden="true"></i> Nilai Kriteria</button></a>
                       <a href="'. route('kriteria.edit', $data->id) .'" title="Edit Kriteria"><button class="btn btn-outline-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                      <a href="'. route('kriteria.show', $data->id) .'" title="View Kriteria"><button class="btn btn-outline-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                       <form method="POST" action="'. route('kriteria.destroy', $data->id) .'" accept-charset="UTF-8" style="display:inline">
                           '.method_field("DELETE").'
                           '.csrf_field().'

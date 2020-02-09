@@ -15,19 +15,6 @@
     	{!! $errors->first('alternatif_id', '<p class="help-block">:message</p>') !!}
   	</div>
 </div>
-<!--
-<div class="form-group row {{ $errors->has('kriteria_id') ? 'has-error' : ''}}">
-    <label for="kriteria_id" class="control-label text-right col-md-3">{{ 'Kriteria Id' }}</label>
-    <div class="col-md-9">
-    	<select name="kriteria_id" class="form-control" id="kriteria_id" required>
-        @foreach ($evaluasi['kriterias'] as $key => $row)
-            <option value="{{ $row->id }}" {{ (isset($evaluasi->kriteria_id) && ($evaluasi->kriteria_id == $row->id || $evaluasi->kriteria_id == old('kriteria_id'))) ? 'selected' : ''}}>{{ $row->kriteria }}</option>
-        @endforeach
-        </select>
-    	{!! $errors->first('kriteria_id', '<p class="help-block">:message</p>') !!}
-  	</div>
-</div>
--->
 @foreach($evaluasi['kriterias'] as $key => $row)
     <div class="form-group row {{ $errors->has('nilai-'.$row->id) ? 'has-error' : ''}}">
         <label for="nilai-{{$row->id}}" class="control-label text-right col-md-3">{{ 'Nilai '.$row->kriteria }}</label>
@@ -35,7 +22,20 @@
             @if(isset($evaluasi->nilai[$row->id]))
                 <input type="hidden" name="edit_nilai_{{$row->id}}" value="{{ $evaluasi->nilai[$row->id]->id }}">
             @endif
-        	<input class="form-control" step=".01" name="nilai-{{$row->id}}" type="number" id="nilai-{{$row->id}}" value="{{ isset($evaluasi->nilai[$row->id]) ? $evaluasi->nilai[$row->id]->nilai : old('nilai-'.$row->id)}}" required>
+            <select name="nilai-{{$row->id}}" id="nilai-{{$row->id}}" class="form-control" required>
+                @foreach ($row->nilai as $r_nilai)
+                    {{ isset($evaluasi->nilai[$row->id]) ? $evaluasi->nilai[$row->id]->nilai : old('nilai-'.$row->id)}}
+                    @php
+                    $selected = '';
+                    $selected = ((isset($evaluasi->nilai[$row->id]) && $evaluasi->nilai[$row->id]->nilai == $r_nilai->nilai) ? 'selected' : '');
+                    if(old('nilai-'.$row->id) && old('nilai-'.$row->id) == $r_nilai->nilai)
+                    {
+                        $selected = 'selected';
+                    }
+                    @endphp
+                    <option value="{{ $r_nilai->nilai }}" {{ $selected }}>{{ $r_nilai->nilai.' ('.$r_nilai->deskripsi.')' }}</option>
+                @endforeach
+            </select>
         	{!! $errors->first('nilai-'.$row->id, '<p class="help-block">:message</p>') !!}
       	</div>
     </div>

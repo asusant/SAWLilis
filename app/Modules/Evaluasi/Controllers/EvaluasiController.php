@@ -79,7 +79,7 @@ class EvaluasiController extends Controller
      */
     public function create()
     {
-        $evaluasi['kriterias'] = Kriteria::all();
+        $evaluasi['kriterias'] = Kriteria::with('nilai')->get();
         $evaluasi['alternatifs'] = Alternatif::all();
 
         return view('Evaluasi::evaluasi.create', compact('evaluasi'));
@@ -152,7 +152,7 @@ class EvaluasiController extends Controller
         $evaluasi = Evaluasi::where('alternatif_id',$id)->first();
         $evaluasi->nilai = Evaluasi::where('alternatif_id', $id)->get()->keyBy('kriteria_id');
 
-        $evaluasi['kriterias'] = Kriteria::all();
+        $evaluasi['kriterias'] = Kriteria::with('nilai')->get();
         $evaluasi['alternatifs'] = Alternatif::all();
 
         return view('Evaluasi::evaluasi.edit', compact('evaluasi'));
@@ -182,11 +182,13 @@ class EvaluasiController extends Controller
 
         $this->validate($request, [
 			'alternatif_id' => 'required|exists:alternatifs,id',
-		]);
+        ]);
 
         $evaluasi = array();
 
-        foreach ($evaluated as $key => $row) {
+        $kriterias = Kriteria::get()->keyBy('id');
+
+        foreach ($kriterias as $key => $row) {
             unset($evaluasi);
             $evaluasi = Evaluasi::find($request->input('edit_nilai_'.$row->id));
 

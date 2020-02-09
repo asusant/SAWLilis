@@ -33,4 +33,9 @@ class Kriteria extends Model
     {
         return $this->hasMany('App\Modules\Evaluasi\Models\Evaluasi');
     }
+
+    public function nilai()
+    {
+        return $this->hasMany('App\Modules\NilaiKriteria\Models\NilaiKriteria');
+    }
 }

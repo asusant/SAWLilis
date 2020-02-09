@@ -79,7 +79,7 @@
                       <div class="card-body">
                           <h4 class="card-title">Perangkingan</h4>
                           <h6 class="card-subtitle">Hasil Perangkingan Metode SAW</h6>
-                          {!! $evaluasi['saw']->getPerangkinganTable() !!}
+                          {!! $evaluasi['saw']->getPerangkinganTable(true) !!}
 
                           <center><button class="btn btn-lg btn-success" onclick="showPerhitungan();">Lihat Perhitungan</button></center>
                       </div>

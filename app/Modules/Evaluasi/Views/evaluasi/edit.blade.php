@@ -35,7 +35,7 @@
           <div class="row justify-content-md-center">
               <div class="col-12">
                   <div class="card">
-                    <div class="card-header bg-info"><h4 class="m-b-0 text-white">Edit Evaluasi #{{ $evaluasi->id }}</h4>
+                    <div class="card-header bg-info"><h4 class="m-b-0 text-white">Edit Evaluasi #{{ $evaluasi['alternatif']->alternatif }}</h4>
                     </div>
                       <div class="card-body">
                         @if ($errors->any())
@@ -46,7 +46,7 @@
                             </ul>
                         @endif
 
-                        <form method="POST" action="{{ url('/evaluasi/' . $evaluasi->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                        <form method="POST" action="{{ url('/evaluasi/' . $evaluasi['alternatif']->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             {{ csrf_field() }}
 

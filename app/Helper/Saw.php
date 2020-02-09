@@ -120,11 +120,24 @@ class Saw
         return $return .= "</table></div>";
     }
 
-    public function getPerangkinganTable()
+    public function getPerangkinganTable($only_section = false)
     {
         $return = "<div class='table-responsive'><table id='table-hasil' class='".$this->getTableClass()."'><thead><tr><th>Section</th><th>Alternatif</th><th>Nilai Preferensi</th></tr></thead>";
 
+        $listed_hr = array();
+
         foreach ($this->getAlternatifs()->sortByDesc('nilaiPreferensi') as $key => $row) {
+            if($only_section)
+            {
+                if(in_array($row->section->section, $listed_hr))
+                {
+                    continue;
+                }
+                else
+                {
+                    $listed_hr[] = $row->section->section;
+                }
+            }
             $return .= "<tr>";
             $return .= "<td>".$row->section->section."</td>";
             $return .= "<td>".$row->alternatif."</td>";
