@@ -1,0 +1,29 @@
+{
+    "fields": [
+        {
+            "name": "name",
+            "type": "string"
+        },
+        {
+            "name": "price",
+            "type": "string"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "user",
+            "type": "belongsTo",
+            "class": "App\\User"
+        }
+    ],
+    "validations": [
+        {
+            "field": "name",
+            "rules": "required|string"
+        },
+        {
+            "field": "price",
+            "rules": "required|string|max:50"
+        }
+    ]
+}

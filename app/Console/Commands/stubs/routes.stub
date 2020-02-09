@@ -1,0 +1,8 @@
+<?php
+
+  Route::group(['namespace' => 'App\Modules\{{moduleName}}\Controllers', 'middleware' => ['web']], function(){
+    Route::resource('{{routeGroup}}{{viewName}}', '{{moduleName}}Controller');
+    Route::get('/details/{{routeGroup}}{{viewName}}', '{{moduleName}}Controller@details')->name('{{routeGroup}}{{viewName}}.ajax.index');
+  });
+
+  {{apiRoute}}

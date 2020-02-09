@@ -1,0 +1,40 @@
+{
+    "fields": [
+        {
+            "name": "user_id",
+            "type": "select",
+            "options": {
+                "1" : "Root"
+            }
+        },
+        {
+            "name": "level_id",
+            "type": "select",
+            "options": {
+                "1" : "Root"
+            }
+        }
+    ],
+    "relationships": [
+        {
+            "name": "user",
+            "type": "belongsTo",
+            "class": "App\\Modules\\User\\Models\\User"
+        },
+        {
+            "name": "level",
+            "type": "belongsTo",
+            "class": "App\\Modules\\Level\\Models\\Level"
+        }
+    ],
+    "validations": [
+        {
+            "field": "user_id",
+            "rules": "required|exists:users,id"
+        },
+        {
+            "field": "level_id",
+            "rules": "required|exists:levels,id"
+        }
+    ]
+}

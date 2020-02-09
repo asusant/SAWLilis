@@ -1,0 +1,152 @@
+{
+    "fields": [
+        {
+            "name": "level_id",
+            "type": "select",
+            "options": {
+                "1": "Root"
+            }
+        },
+        {
+            "name": "module_id",
+            "type": "select",
+            "options": {
+                "1": "Module"
+            }
+        },
+        {
+            "name": "index",
+            "type": "select",
+            "options": {
+
+                "0": "Block",
+                "1": "Allow"
+
+            }
+        },
+        {
+            "name": "show",
+            "type": "select",
+            "options": {
+
+                "0": "Block",
+                "1": "Allow"
+
+            }
+        },
+        {
+            "name": "create",
+            "type": "select",
+            "options": {
+
+                "0": "Block",
+                "1": "Allow"
+
+            }
+        },
+        {
+            "name": "store",
+            "type": "select",
+            "options": {
+
+                "0": "Block",
+                "1": "Allow"
+
+            }
+        },
+        {
+            "name": "edit",
+            "type": "select",
+            "options": {
+
+                "0": "Block",
+                "1": "Allow"
+
+            }
+        },
+        {
+            "name": "update",
+            "type": "select",
+            "options": {
+
+                "0": "Block",
+                "1": "Allow"
+
+            }
+        },
+        {
+            "name": "delete",
+            "type": "select",
+            "options": {
+
+                "0": "Block",
+                "1": "Allow"
+
+            }
+        },
+        {
+            "name": "custom",
+            "type": "select",
+            "options": {
+
+                "0": "Block",
+                "1": "Allow"
+
+            }
+        }
+    ],
+    "relationships": [
+        {
+            "name": "level",
+            "type": "belongsTo",
+            "class": "App\\Modules\\Level\\Models\\Level"
+        },
+        {
+            "name": "module",
+            "type": "belongsTo",
+            "class": "App\\Modules\\Module\\Models\\Module"
+        }
+    ],
+    "validations": [
+        {
+            "field": "level_id",
+            "rules": "required|exists:levels,id"
+        },
+        {
+            "field": "module_id",
+            "rules": "required|exists:modules,id"
+        },
+        {
+            "field": "index",
+            "rules": "required|numeric|max:1"
+        },
+        {
+            "field": "show",
+            "rules": "required|numeric|max:1"
+        },
+        {
+            "field": "create",
+            "rules": "required|numeric|max:1"
+        },
+        {
+            "field": "store",
+            "rules": "required|numeric|max:1"
+        },
+        {
+            "field": "edit",
+            "rules": "required|numeric|max:1"
+        },
+        {
+            "field": "update",
+            "rules": "required|numeric|max:1"
+        },
+        {
+            "field": "delete",
+            "rules": "required|numeric|max:1"
+        },
+        {
+            "field": "custom",
+            "rules": "required|numeric|max:1"
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "fields": [
+        {
+            "name": "kode_section",
+            "type": "string"
+        },
+        {
+            "name": "section",
+            "type": "string"
+        }
+    ],
+    "validations": [
+        {
+            "field": "kode_section",
+            "rules": "required|unique:sections,kode_section"
+        },
+        {
+            "field": "section",
+            "rules": "required"
+        }
+    ]
+}

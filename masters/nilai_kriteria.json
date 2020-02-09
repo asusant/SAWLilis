@@ -1,0 +1,41 @@
+{
+    "fields": [
+        {
+            "name": "kriteria_id",
+            "type": "select",
+            "options": {
+                "1":"Kriteria 1",
+                "2":"Kriteria 2"
+            }
+        },
+        {
+            "name": "deskripsi",
+            "type": "string"
+        },
+        {
+            "name": "nilai",
+            "type": "integer"
+        }
+    ],
+    "validations": [
+        {
+            "field": "kriteria_id",
+            "rules": "required|exists:kriterias,id"
+        },
+        {
+            "field": "deskripsi",
+            "rules": "required"
+        },
+        {
+            "field": "nilai",
+            "rules": "required|numeric"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "kriteria",
+            "type": "belongsTo",
+            "class": "App\\Modules\\Kriteria\\Models\\Kriteria"
+        }
+    ]
+}

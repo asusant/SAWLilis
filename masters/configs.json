@@ -1,0 +1,38 @@
+{
+    "fields": [
+        {
+            "name": "config_name",
+            "type": "string"
+        },
+        {
+            "name": "key",
+            "type": "string"
+        },
+        {
+            "name": "value",
+            "type": "string"
+        },
+        {
+            "name": "description",
+            "type": "text"
+        }
+    ],
+    "validations": [
+        {
+            "field": "config_name",
+            "rules": "required|string"
+        },
+        {
+            "field": "key",
+            "rules": "required|string|max:50"
+        },
+        {
+            "field": "value",
+            "rules": "required|string"
+        },
+        {
+            "field": "description",
+            "rules": "required|string"
+        }
+    ]
+}

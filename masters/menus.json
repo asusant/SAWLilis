@@ -1,0 +1,48 @@
+{
+    "fields": [
+        {
+            "name": "group_menu_id",
+            "type": "select",
+            "options": {
+                "1": "Group Menu 1"
+            }
+        },
+        {
+            "name": "menu",
+            "type": "string"
+        },
+        {
+            "name": "icon",
+            "type": "string"
+        },
+        {
+            "name": "priority",
+            "type": "integer"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "group_menu",
+            "type": "belongsTo",
+            "class": "App\\Modules\\GroupMenu\\Models\\GroupMenu"
+        }
+    ],
+    "validations": [
+        {
+            "field": "group_menu_id",
+            "rules": "required|string"
+        },
+        {
+            "field": "menu",
+            "rules": "required|string"
+        },
+        {
+            "field": "icon",
+            "rules": "required|string|max:50"
+        },
+        {
+            "field": "priority",
+            "rules": "required|numeric"
+        }
+    ]
+}

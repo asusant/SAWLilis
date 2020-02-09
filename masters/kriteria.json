@@ -1,0 +1,34 @@
+{
+    "fields": [
+        {
+            "name": "kriteria",
+            "type": "string"
+        },
+        {
+            "name": "bobot",
+            "type": "integer"
+        },
+        {
+            "name": "atribut",
+            "type": "select",
+            "options": {
+                "benefit":"Benefit",
+                "cost":"Cost"
+            }
+        }
+    ],
+    "validations": [
+        {
+            "field": "kriteria",
+            "rules": "required"
+        },
+        {
+            "field": "bobot",
+            "rules": "required|numeric"
+        },
+        {
+            "field": "atribut",
+            "rules": "required"
+        }
+    ]
+}

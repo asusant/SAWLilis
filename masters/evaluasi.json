@@ -1,0 +1,38 @@
+{
+    "fields": [
+        {
+            "name": "alternatif_id",
+            "type": "select",
+            "options": {
+                "1":"Alternatif 1",
+                "2":"Alternatif 2"
+            }
+        },
+        {
+            "name": "kriteria_id",
+            "type": "select",
+            "options": {
+                "1":"Kriteria 1",
+                "2":"Kriteria 2"
+            }
+        },
+        {
+            "name": "nilai",
+            "type": "integer"
+        }
+    ],
+    "validations": [
+        {
+            "field": "alternatif_id",
+            "rules": "required|exists:altertatifs,id"
+        },
+        {
+            "field": "kriteria_id",
+            "rules": "required|exists:kriterias,id"
+        },
+        {
+            "field": "nilai",
+            "rules": "required|numeric"
+        }
+    ]
+}

@@ -1,0 +1,56 @@
+{
+    "fields": [
+        {
+            "name": "menu_id",
+            "type": "select",
+            "options": {
+                "1" : "Menu 1"
+            }
+        },
+        {
+            "name": "module",
+            "type": "string"
+        },
+        {
+            "name": "route",
+            "type": "string"
+        },
+        {
+            "name": "icon",
+            "type": "string"
+        },
+        {
+            "name": "priority",
+            "type": "integer"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "menu",
+            "type": "belongsTo",
+            "class": "App\\Modules\\Menu\\Models\\Menu"
+        }
+    ],
+    "validations": [
+        {
+            "field": "menu_id",
+            "rules": "required|exists:menus,id"
+        },
+        {
+            "field": "module",
+            "rules": "required|string|max:50"
+        },
+        {
+            "field": "route",
+            "rules": "required|string"
+        },
+        {
+            "field": "icon",
+            "rules": "required|string|max:50"
+        },
+        {
+            "field": "priority",
+            "rules": "required|numeric"
+        }
+    ]
+}

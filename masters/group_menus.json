@@ -1,0 +1,29 @@
+{
+    "fields": [
+        {
+            "name": "group_name",
+            "type": "string"
+        },
+        {
+            "name": "icon",
+            "type": "string"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "menu",
+            "type": "hasMany",
+            "class": "App\\Modules\\Menu\\Models\\Menu"
+        }
+    ],
+    "validations": [
+        {
+            "field": "group_name",
+            "rules": "required|string"
+        },
+        {
+            "field": "icon",
+            "rules": "required|string"
+        }
+    ]
+}

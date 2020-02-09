@@ -1,0 +1,50 @@
+{
+    "fields": [
+        {
+            "name": "name",
+            "type": "string"
+        },
+        {
+            "name": "username",
+            "type": "string"
+        },
+        {
+            "name": "email",
+            "type": "string"
+        },
+        {
+            "name": "password",
+            "type": "password"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "user_level",
+            "type": "hasMany",
+            "class": "App\\Modules\\UserLevel\\Models\\UserLevel"
+        },
+        {
+            "name": "log",
+            "type": "hasMany",
+            "class": "App\\Modules\\Log\\Models\\Log"
+        }
+    ],
+    "validations": [
+        {
+            "field": "name",
+            "rules": "required|string"
+        },
+        {
+            "field": "username",
+            "rules": "nullable|string|max:50|unique:users,username"
+        },
+        {
+            "field": "email",
+            "rules": "required|string|unique:users,email"
+        },
+        {
+            "field": "password",
+            "rules": "required|string|min:6|confirmed"
+        }
+    ]
+}

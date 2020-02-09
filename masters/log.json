@@ -1,0 +1,62 @@
+{
+    "fields": [
+        {
+            "name": "user_id",
+            "type": "integer"
+        },
+        {
+            "name": "table",
+            "type": "string"
+        },
+        {
+            "name": "row_id",
+            "type": "integer"
+        },
+        {
+            "name": "action",
+            "type": "select",
+            "options": {
+                "index": "Index",
+                "create": "Create",
+                "store": "Store",
+                "show": "Show",
+                "edit": "Edit",
+                "update": "Update",
+                "destroy": "Destroy"
+            }
+        },
+        {
+            "name": "description",
+            "type": "text"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "user",
+            "type": "belongsTo",
+            "class": "App\\User"
+        }
+    ],
+    "validations": [
+        {
+            "field": "user_id",
+            "rules": "required|numeric"
+        },
+        {
+            "field": "table",
+            "rules": "required|string|max:50"
+        },
+        {
+            "field": "row_id",
+            "rules": "required|numeric"
+        },
+        {
+            "field": "action",
+            "rules": "required"
+        },
+        {
+            "field": "description",
+            "rules": "required"
+        }
+    ]
+}

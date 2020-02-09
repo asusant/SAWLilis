@@ -1,0 +1,22 @@
+{
+    "fields": [
+        {
+            "name": "alternatif",
+            "type": "string"
+        },
+        {
+            "name": "keterangan",
+            "type": "text"
+        }
+    ],
+    "validations": [
+        {
+            "field": "alternatif",
+            "rules": "required"
+        },
+        {
+            "field": "keterangan",
+            "rules": "required"
+        }
+    ]
+}

@@ -1,0 +1,42 @@
+{
+    "fields": [
+        {
+            "name": "level",
+            "type": "string"
+        },
+        {
+            "name": "icon",
+            "type": "string"
+        },
+        {
+            "name": "description",
+            "type": "text"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "user_level",
+            "type": "hasMany",
+            "class": "App\\Modules\\UserLevel\\Models\\UserLevel"
+        },
+        {
+            "name": "privilege",
+            "type": "hasMany",
+            "class": "App\\Modules\\Privilege\\Models\\Privilege"
+        }
+    ],
+    "validations": [
+        {
+            "field": "level",
+            "rules": "required|string"
+        },
+        {
+            "field": "icon",
+            "rules": "required|string|max:50"
+        },
+        {
+            "field": "description",
+            "rules": "required|string"
+        }
+    ]
+}

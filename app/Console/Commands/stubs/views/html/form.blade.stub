@@ -1,0 +1,9 @@
+%%formFieldsHtml%%
+
+<div class="form-action">
+  <div class="row">
+    <div class="offset-md-3 col-md-9">
+    <input class="btn btn-info" type="submit" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}">
+  </div>
+</div>
+</div>
