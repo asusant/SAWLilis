@@ -38,9 +38,9 @@ class Saw
             }
             foreach ($this->getEvaluasies()->where('kriteria_id', $row->id) as $k => $r) {
                 if ($row->atribut == 'benefit') {
-                    $this->evaluasies[$k]->matriksTernormalisasi = $r->nilai / $nilai;
+                    $this->evaluasies[$k]->matriksTernormalisasi = round( ($r->nilai / $nilai), 2);
                 }else{
-                    $this->evaluasies[$k]->matriksTernormalisasi = $nilai / $r->nilai;
+                    $this->evaluasies[$k]->matriksTernormalisasi = round( ($nilai / $r->nilai), 2);
                 }
             }
         }
@@ -53,6 +53,7 @@ class Saw
             foreach ($this->getKriterias() as $k => $r) {
                 $this->alternatifs[$key]->nilaiPreferensi += $this->getEvaluasies()->where('alternatif_id', $row->id)->where('kriteria_id', $r->id)->first()->matriksTernormalisasi * $r->bobot;
             }
+            $this->alternatifs[$key]->nilaiPreferensi = round( $this->alternatifs[$key]->nilaiPreferensi, 2 );
         }
     }
 
